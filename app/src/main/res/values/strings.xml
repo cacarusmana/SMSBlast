@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">my SMS Broadcast</string>
+
+
+    <string name="label.customer_name">Nama Pelanggan</string>
+    <string name="label.phone_number">No. HP</string>
+    <string name="label.gender">J. Kelamain</string>
+    <string name="label.male">laki-laki</string>
+    <string name="label.female">Perempuan</string>
+    <string name="label.receiver">Penerima</string>
+    <string name="label.contoh">Contoh : Selamat Pagi</string>
+    <string name="label.input_message">Masukan Pesan</string>
+    <string name="label.view_data">Lihat Data yang diunggah</string>
+    <string name="label.greeting">Kata Salam/Pembuka</string>
+    <string name="label.message_content">Isi Pesan</string>
+    <string name="label.file_not_uploaded">File belum di unggah</string>
+    <string name="label.message">Pesan</string>
+
+
+    <string name="label.upload">Unggah file pelanggan</string>
+    <string name="button.send">Kirim</string>
+    <string name="button.ok">OK</string>
+    <string name="button.yes">Ya</string>
+    <string name="button.no">No</string>
+
+    <string name="message.file_supported">File yang di unggah harus berformat .xls</string>
+    <string name="message.file_not_supported">Format file tidak didukung, silahkan upload file berformat .xls</string>
+    <string name="message.file_not_uploaded">Silahkan unggah file terlebih dahulu</string>
+    <string name="message.greeting_is_blank">Kolom salam pembuka harus diisi</string>
+    <string name="message.message_is_blank">Kolom Isi Pesan harus diisi</string>
+    <string name="message.sms_sent">SMS telah dikirim</string>
+
+</resources>
