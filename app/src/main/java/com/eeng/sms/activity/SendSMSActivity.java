@@ -14,6 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,13 +47,19 @@ public class SendSMSActivity extends AppCompatActivity {
     private static final int PERMISSION_ALL = 10;
     private static final int SEND_SMS_PERMISSION = 11;
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    private String[] SMS_PERMISSIONS =  {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS};
+    private String[] SMS_PERMISSIONS = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS};
 
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.file_name) TextView fileNameLabel;
-    @Bind(R.id.greeting_edit) EditText greetingEdit;
-    @Bind(R.id.message_edit) EditText messageEdit;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.file_name)
+    TextView fileNameLabel;
+    @Bind(R.id.greeting_edit)
+    EditText greetingEdit;
+    @Bind(R.id.message_edit)
+    EditText messageEdit;
+    @Bind(R.id.text_length)
+    TextView textLength;
 
     private List<Customer> customerList;
     private String greeting;
@@ -79,6 +87,28 @@ public class SendSMSActivity extends AppCompatActivity {
                                                  }
                                              }
         );
+
+        messageEdit.addTextChangedListener(new MyTextWatcher());
+        greetingEdit.addTextChangedListener(new MyTextWatcher());
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            int length = messageEdit.getText().length() + greetingEdit.getText().length();
+            textLength.setText(String.valueOf(length));
+        }
     }
 
     private String validateField() {
@@ -255,7 +285,8 @@ public class SendSMSActivity extends AppCompatActivity {
                 }
 
                 break;
-            } case SEND_SMS_PERMISSION: {
+            }
+            case SEND_SMS_PERMISSION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
@@ -305,7 +336,6 @@ public class SendSMSActivity extends AppCompatActivity {
     }
 
 
-
     private class SendSMSTask extends AsyncTask<Object, String, String> {
 
         private ProgressDialog dialog;
@@ -322,7 +352,7 @@ public class SendSMSActivity extends AppCompatActivity {
             for (Customer customer : customerList) {
                 SMSUtil.sendLongSMS(SendSMSActivity.this, customer, greeting, contentMessage);
                 try {
-                    Thread.sleep(400);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -344,7 +374,6 @@ public class SendSMSActivity extends AppCompatActivity {
             Toast.makeText(SendSMSActivity.this, getString(R.string.message_sms_sent), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
 }
